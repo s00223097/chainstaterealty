@@ -1,0 +1,6 @@
+1. npm install -g truffle
+2. truffle version
+3. cd your_project_directory
+4. truffle init
+5. truffle compile
+6. truffle migrate --reset --network development
