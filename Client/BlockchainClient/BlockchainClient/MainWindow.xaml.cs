@@ -18,9 +18,16 @@ namespace BlockchainClient
     public partial class MainWindow : Window
     {
         private string rpcUrl = "http://127.0.0.1:7545"; // Ganache RPC URL
+        
+        //for the Test contract
         private string contractAddress = "0xAc4105FdB50254EEDA1aeFa982261d62B9aBacDb"; // Replace with your contract address
+        
+        //got these from ganache
         private string senderAddress = "0xE5C7A94F27F5D0BeD20Fe05e2194374569dcDd1C"; // Replace with your account address
         private string senderPrivateKey = "0x1ead5f0761a26d375680e564c5ba3fff7ffdb19a158c1e71be65761b3941dfcf\r\n"; // Use a secure method for private keys
+       
+        //this is found in build\contracts Test.json and contains the declarations details of teh contreact (variables, functions etc.)
+        //will have to create a class that wraps this up for each contacrt type.
         private string abi = @"[
     {
       ""inputs"": [
@@ -111,6 +118,7 @@ namespace BlockchainClient
         {
             var account = new ManagedAccount(senderAddress, senderPrivateKey);
             web3 = new Web3(account, rpcUrl);
+
             contract = web3.Eth.GetContract(abi, contractAddress);
         }
 
