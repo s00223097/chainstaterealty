@@ -14,4 +14,9 @@ contract Test {
     function updateMessage(string memory _newMessage) public {
         message = _newMessage;
     }
+
+        function getMessage() public view returns (string memory) 
+    {
+        return message;
+    }
 }
