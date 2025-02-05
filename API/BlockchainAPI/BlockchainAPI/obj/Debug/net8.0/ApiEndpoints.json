@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "BlockchainAPI.Controllers.BlockchainController",
+    "Method": "GetMessage",
+    "RelativePath": "api/Blockchain/message",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

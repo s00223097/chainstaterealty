@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|e:\\github\\chainstaterealty\\api\\blockchainapi\\blockchainapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|solutionrelative:blockchainapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|e:\\github\\chainstaterealty\\api\\blockchainapi\\blockchainapi\\controllers\\blockchaincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|solutionrelative:blockchainapi\\controllers\\blockchaincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|e:\\github\\chainstaterealty\\api\\blockchainapi\\blockchainapi\\services\\blockchainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|solutionrelative:blockchainapi\\services\\blockchainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|e:\\github\\chainstaterealty\\api\\blockchainapi\\blockchainapi\\blockchainapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D2DD8DDA-68B5-4E2F-AE7F-E0D07DD213B5}|BlockchainAPI\\BlockchainAPI.csproj|solutionrelative:blockchainapi\\blockchainapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BlockchainController.cs",
+              "DocumentMoniker": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Controllers\\BlockchainController.cs",
+              "RelativeDocumentMoniker": "BlockchainAPI\\Controllers\\BlockchainController.cs",
+              "ToolTip": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Controllers\\BlockchainController.cs",
+              "RelativeToolTip": "BlockchainAPI\\Controllers\\BlockchainController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T19:04:18.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BlockchainService.cs",
+              "DocumentMoniker": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Services\\BlockchainService.cs",
+              "RelativeDocumentMoniker": "BlockchainAPI\\Services\\BlockchainService.cs",
+              "ToolTip": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Services\\BlockchainService.cs",
+              "RelativeToolTip": "BlockchainAPI\\Services\\BlockchainService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T19:01:31.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BlockchainAPI",
+              "DocumentMoniker": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\BlockchainAPI.csproj",
+              "RelativeDocumentMoniker": "BlockchainAPI\\BlockchainAPI.csproj",
+              "ToolTip": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\BlockchainAPI.csproj",
+              "RelativeToolTip": "BlockchainAPI\\BlockchainAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-05T19:01:14.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Program.cs",
+              "RelativeDocumentMoniker": "BlockchainAPI\\Program.cs",
+              "ToolTip": "E:\\GitHub\\chainstaterealty\\API\\BlockchainAPI\\BlockchainAPI\\Program.cs",
+              "RelativeToolTip": "BlockchainAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T18:59:11.449Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
