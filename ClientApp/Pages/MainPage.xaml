@@ -15,7 +15,8 @@
 
             <Button
                 x:Name="btnLogin"
-                Text="LOGIN" 
+                Text="LOGIN"
+                CornerRadius="30"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnLoginClicked"
                 HorizontalOptions="Fill" />
@@ -23,6 +24,7 @@
             <Button
                 x:Name="btnRegister"
                 Text="REGISTER" 
+                CornerRadius="30"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnRegisterClicked"
                 HorizontalOptions="Fill" />

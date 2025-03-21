@@ -23,5 +23,17 @@ namespace Shared
             var response = await httpClient.GetFromJsonAsync<List<Test>>("/api/Tests");
             return response ?? new List<Test>();
         }
+
+        public async Task<string> Login(string username, string password)
+        {
+            var response = await httpClient.GetFromJsonAsync<string>("/api/auth/login");
+            return response;
+        }
+
+        public async Task<string> Register(string username, string password)
+        {
+            var response = await httpClient.GetFromJsonAsync<string>("/api/auth/register");
+            return response;
+        }
     }
 }
