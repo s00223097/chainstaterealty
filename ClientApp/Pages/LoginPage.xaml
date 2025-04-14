@@ -2,26 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientApp.Pages.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout>
-
+             Title="Login">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Label 
+            Text="Welcome Back"
+            FontSize="28"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" 
+            Margin="0,0,0,20"/>
+            
         <Entry 
            x:Name="txtEmail" 
-           Placeholder="EMAIL"
-           VerticalOptions="Center"
-           Text="sample@email.com"/>
+           Placeholder="Email"
+           Keyboard="Email"
+           VerticalOptions="Center"/>
 
         <Entry 
            x:Name="txtPassword" 
-           Placeholder="PASSWORD"
+           Placeholder="Password"
            VerticalOptions="Center"
            IsPassword="True"/>
         
         <Button
-                x:Name="btnLogin"
-                Text="LOGIN" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnLoginClicked"
-                HorizontalOptions="Fill" />
+           x:Name="btnLogin"
+           Text="LOGIN" 
+           Clicked="OnLoginClicked"
+           HorizontalOptions="Fill"
+           Margin="0,20,0,0" />
+        
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,10,0,0">
+            <Label Text="Don't have an account?" VerticalOptions="Center" />
+            <Button 
+                x:Name="btnRegister"
+                Text="Register" 
+                Clicked="OnRegisterClicked"
+                TextColor="{StaticResource Primary}"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                Padding="0" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

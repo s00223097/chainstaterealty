@@ -24,16 +24,44 @@ namespace Shared
             return response ?? new List<Test>();
         }
 
-        public async Task<string> Login(string username, string password)
+        public async Task<string?> Login(string email, string password)
         {
-            var response = await httpClient.GetFromJsonAsync<string>("/api/auth/login");
-            return response;
+            try 
+            {
+                var model = new LoginModel { Email = email, Password = password };
+                var response = await httpClient.PostAsJsonAsync("/api/auth/login", model);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                    return result?.Token;
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public async Task<string> Register(string username, string password)
+        public async Task<bool> Register(string email, string password)
         {
-            var response = await httpClient.GetFromJsonAsync<string>("/api/auth/register");
-            return response;
+            try
+            {
+                var model = new RegisterModel { Email = email, Password = password };
+                var response = await httpClient.PostAsJsonAsync("/api/auth/register", model);
+                
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
         }
+    }
+
+    public class LoginResponse
+    {
+        public string Token { get; set; }
     }
 }
