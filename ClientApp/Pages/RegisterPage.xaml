@@ -3,49 +3,117 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientApp.Pages.RegisterPage"
              Title="Register">
-    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-        <Label 
-            Text="Create Account"
-            FontSize="28"
-            FontAttributes="Bold"
-            HorizontalOptions="Center"
-            Margin="0,0,0,20"/>
+    <Grid>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            <Label 
+                Text="Create Account"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20"/>
 
-        <Entry 
-            x:Name="txtEmail" 
-            Placeholder="Email"
-            Keyboard="Email"
-            VerticalOptions="Center"/>
+            <Entry 
+                x:Name="txtEmail" 
+                Placeholder="Email"
+                Keyboard="Email"
+                TextChanged="OnEmailTextChanged"
+                VerticalOptions="Center"/>
 
-        <Entry 
-            x:Name="txtPassword" 
-            Placeholder="Password"
-            VerticalOptions="Center"
-            IsPassword="True"/>
+            <VerticalStackLayout Spacing="5">
+                <Entry 
+                    x:Name="txtPassword" 
+                    Placeholder="Password"
+                    VerticalOptions="Center"
+                    TextChanged="OnPasswordTextChanged"
+                    IsPassword="True"/>
+                    
+                <!-- Password requirements indicator -->
+                <Label 
+                    x:Name="lblPasswordRequirements" 
+                    Text="Password must be at least 6 characters" 
+                    FontSize="12" 
+                    TextColor="Gray" 
+                    IsVisible="true"/>
+            </VerticalStackLayout>
+                
+            <Entry 
+                x:Name="txtConfirmPassword" 
+                Placeholder="Confirm Password"
+                TextChanged="OnConfirmPasswordTextChanged"
+                VerticalOptions="Center"
+                IsPassword="True"/>
+                
+            <Label 
+                x:Name="lblPasswordMatch" 
+                Text="Passwords must match" 
+                FontSize="12" 
+                TextColor="Gray" 
+                IsVisible="false"/>
             
-        <Entry 
-            x:Name="txtConfirmPassword" 
-            Placeholder="Confirm Password"
-            VerticalOptions="Center"
-            IsPassword="True"/>
+            <Button
+                x:Name="btnRegister"
+                Text="REGISTER" 
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Fill"
+                Margin="0,20,0,0" />
+                
+            <!-- Social Login Section -->
+            <Label 
+                Text="OR SIGN UP WITH"
+                HorizontalOptions="Center"
+                Margin="0,20,0,20"
+                FontSize="16"
+                TextColor="Gray"/>
+            
+            <Button
+                x:Name="btnGoogleLogin"
+                Text="Sign up with Google" 
+                Clicked="OnGoogleLoginClicked"
+                BackgroundColor="#DB4437"
+                TextColor="White"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,10" />
+                
+            <Button
+                x:Name="btnMicrosoftLogin"
+                Text="Sign up with Microsoft" 
+                Clicked="OnMicrosoftLoginClicked"
+                BackgroundColor="#2F2F2F"
+                TextColor="White"
+                HorizontalOptions="Fill" />
+            
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
+                <Label Text="Already have an account?" VerticalOptions="Center" />
+                <Button 
+                    x:Name="btnLogin"
+                    Text="Login" 
+                    Clicked="OnLoginClicked"
+                    TextColor="{StaticResource Primary}"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Padding="0" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
         
-        <Button
-            x:Name="btnRegister"
-            Text="REGISTER" 
-            Clicked="OnRegisterClicked"
-            HorizontalOptions="Fill"
-            Margin="0,20,0,0" />
-        
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,10,0,0">
-            <Label Text="Already have an account?" VerticalOptions="Center" />
-            <Button 
-                x:Name="btnLogin"
-                Text="Login" 
-                Clicked="OnLoginClicked"
-                TextColor="{StaticResource Primary}"
-                BackgroundColor="Transparent"
-                BorderColor="Transparent"
-                Padding="0" />
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+        <!-- Loading overlay -->
+        <Grid 
+            x:Name="loadingOverlay" 
+            BackgroundColor="#80000000" 
+            IsVisible="false">
+            <VerticalStackLayout 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Spacing="10">
+                <ActivityIndicator 
+                    IsRunning="True" 
+                    Color="{StaticResource Primary}" 
+                    HeightRequest="50" 
+                    WidthRequest="50"/>
+                <Label 
+                    Text="Creating account..." 
+                    TextColor="White" 
+                    FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

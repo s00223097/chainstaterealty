@@ -1,5 +1,6 @@
 ﻿
 using ClientApp.Pages;
+using Shared;
 
 namespace ClientApp
 {
@@ -15,7 +16,8 @@ namespace ClientApp
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new NavigationPage(new MainPage()));
+            var apiService = Services.GetRequiredService<ApiService>();
+            return new Window(new NavigationPage(new MainPage(apiService)));
         }
     }
 }

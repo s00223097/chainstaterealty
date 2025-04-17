@@ -26,11 +26,3 @@ public partial class HomePage : ContentPage
         base.OnAppearing();
     }
 }
-
-/*
-What I used:
-- Figma to C# / XAML Figma plugin called Uno Platforms
-
-Roughly followed this tutorial: https://platform.uno/docs/articles/external/workshops/simple-calc/modules/MVVM-XAML/02-Import%20UI%20from%20Figma/README.html
-
-*/

@@ -46,10 +46,37 @@ namespace API
                     ValidAudience = jwtSettings["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
+            })
+            // Add Google Authentication
+            .AddGoogle(options =>
+            {
+                var googleAuthSettings = builder.Configuration.GetSection("Authentication:Google");
+                options.ClientId = googleAuthSettings["ClientId"] ?? "";
+                options.ClientSecret = googleAuthSettings["ClientSecret"] ?? "";
+                options.CallbackPath = "/api/auth/google-callback";
+            })
+            // Add Microsoft Authentication
+            .AddMicrosoftAccount(options =>
+            {
+                var msAuthSettings = builder.Configuration.GetSection("Authentication:Microsoft");
+                options.ClientId = msAuthSettings["ClientId"] ?? "";
+                options.ClientSecret = msAuthSettings["ClientSecret"] ?? "";
+                options.CallbackPath = "/api/auth/microsoft-callback";
             });
 
             // Add Authorization
             builder.Services.AddAuthorization();
+
+            // Configure CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
             // Add Controllers
             builder.Services.AddControllers();
@@ -67,6 +94,7 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
