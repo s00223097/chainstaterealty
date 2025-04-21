@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using API.Data;
+using API.Services;
 
 namespace API
 {
@@ -22,6 +23,9 @@ namespace API
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            // Register BlockchainService
+            builder.Services.AddSingleton<BlockchainService>();
 
             // Configure JWT Authentication
             var jwtSettings = builder.Configuration.GetSection("JwtSettings");
