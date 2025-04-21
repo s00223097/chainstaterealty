@@ -152,7 +152,7 @@ public partial class RegisterPage : ContentPage
 		
 		try
 		{
-			// Basic validation
+			// Validation - check if all fields are filled in and passwords match (fairly basic)
 			if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Text) || string.IsNullOrEmpty(txtConfirmPassword.Text))
 			{
 				await DisplayAlert("Error", "Please fill in all fields", "OK");

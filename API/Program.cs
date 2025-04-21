@@ -47,7 +47,7 @@ namespace API
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             })
-            // Add Google Authentication
+            // Google Authentication
             .AddGoogle(options =>
             {
                 var googleAuthSettings = builder.Configuration.GetSection("Authentication:Google");
@@ -55,7 +55,7 @@ namespace API
                 options.ClientSecret = googleAuthSettings["ClientSecret"] ?? "";
                 options.CallbackPath = "/api/auth/google-callback";
             })
-            // Add Microsoft Authentication
+            // Microsoft Authentication
             .AddMicrosoftAccount(options =>
             {
                 var msAuthSettings = builder.Configuration.GetSection("Authentication:Microsoft");
@@ -64,7 +64,7 @@ namespace API
                 options.CallbackPath = "/api/auth/microsoft-callback";
             });
 
-            // Add Authorization
+            // Authorisation
             builder.Services.AddAuthorization();
 
             // Configure CORS
@@ -78,9 +78,9 @@ namespace API
                 });
             });
 
-            // Add Controllers
+            // Controllers
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // from https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientApp.Pages.PropertiesPage"
+             Title="Properties">
+    
+    <RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}">
+        <CollectionView x:Name="propertiesCollection" 
+                      SelectionMode="Single"
+                      SelectionChanged="OnPropertySelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" Padding="10" CornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Image Source="{Binding ImageUrls[0]}" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="200"/>
+                            
+                            <Label Grid.Row="1" 
+                                   Text="{Binding Name}" 
+                                   FontSize="20" 
+                                   FontAttributes="Bold"
+                                   Margin="0,10,0,0"/>
+                            
+                            <Label Grid.Row="2" 
+                                   Text="{Binding Address}" 
+                                   FontSize="14"
+                                   Margin="0,5,0,0"/>
+                            
+                            <HorizontalStackLayout Grid.Row="3" 
+                                                  Spacing="10"
+                                                  Margin="0,10,0,0">
+                                <Label Text="{Binding AvailableShares, StringFormat='{0} shares available'}"
+                                       FontSize="14"/>
+                                <Label Text="{Binding SharePrice, StringFormat='${0:N2} per share'}"
+                                       FontSize="14"
+                                       HorizontalOptions="EndAndExpand"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage> 

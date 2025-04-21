@@ -109,7 +109,6 @@ namespace Shared
 
         public async Task<string?> ExtractTokenFromUri(Uri uri)
         {
-            // Example: myapp://login?token=xyz or https://myapp.com/callback?token=xyz
             if (uri != null && uri.Query.Contains("token="))
             {
                 var query = uri.Query.TrimStart('?');
@@ -124,6 +123,66 @@ namespace Shared
             }
             
             return null;
+        }
+
+        public async Task<List<Property>> GetPropertiesAsync()
+        {
+            var response = await httpClient.GetFromJsonAsync<List<Property>>("/api/Property");
+            return response ?? new List<Property>();
+        }
+
+        public async Task<Property?> GetPropertyAsync(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Property>($"/api/Property/{id}");
+        }
+
+        public async Task<Property?> CreatePropertyAsync(Property property)
+        {
+            var response = await httpClient.PostAsJsonAsync("/api/Property", property);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Property>();
+            }
+            return null;
+        }
+
+        public async Task<bool> UpdatePropertyAsync(int id, Property property)
+        {
+            var response = await httpClient.PutAsJsonAsync($"/api/Property/{id}", property);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> DeletePropertyAsync(int id)
+        {
+            var response = await httpClient.DeleteAsync($"/api/Property/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<Investment>> GetInvestmentsAsync()
+        {
+            var response = await httpClient.GetFromJsonAsync<List<Investment>>("/api/Investment");
+            return response ?? new List<Investment>();
+        }
+
+        public async Task<Investment?> GetInvestmentAsync(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Investment>($"/api/Investment/{id}");
+        }
+
+        public async Task<Investment?> CreateInvestmentAsync(Investment investment)
+        {
+            var response = await httpClient.PostAsJsonAsync("/api/Investment", investment);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Investment>();
+            }
+            return null;
+        }
+
+        public async Task<bool> DeleteInvestmentAsync(int id)
+        {
+            var response = await httpClient.DeleteAsync($"/api/Investment/{id}");
+            return response.IsSuccessStatusCode;
         }
     }
 
