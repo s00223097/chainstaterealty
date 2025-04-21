@@ -18,7 +18,6 @@ Database
 Blockchain
 - Solidity for contracts
 - Nethereum for .NET for blockchain integration for the web api
-- Web3.js/Ethers.js for blockchain interaction (although the app will not commit transactions on an large blockchain due to gas fees.)
 - local Ganache/Hardhat network 
 
 
