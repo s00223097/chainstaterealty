@@ -313,7 +313,7 @@ namespace API.Controllers
                     blockNumber = receipt.BlockNumber.Value.ToString(),
                     blockHash = receipt.BlockHash,
                     gasUsed = receipt.GasUsed.Value.ToString(),
-                    status = receipt.Status.HasValue ? receipt.Status.Value.ToString() : "Unknown"
+                    status = receipt.Status != null ? receipt.Status.Value.ToString() : "Unknown"
                 });
             }
             catch (Exception ex)

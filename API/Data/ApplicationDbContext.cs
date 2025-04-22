@@ -39,7 +39,8 @@ namespace API.Data
         }
     }
 
-    public class ApplicationUser : IdentityUser
+    // IUser interface
+    public class ApplicationUser : IdentityUser, IUser
     {
         public string? FullName { get; set; }
         public bool IsVerified { get; set; }

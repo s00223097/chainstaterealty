@@ -31,7 +31,7 @@ namespace API
             var jwtSettings = builder.Configuration.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!);
 
-            builder.Services.AddAuthentication(options =>
+            var authBuilder = builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,23 +50,33 @@ namespace API
                     ValidAudience = jwtSettings["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
-            })
-            // Google Authentication
-            .AddGoogle(options =>
-            {
-                var googleAuthSettings = builder.Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthSettings["ClientId"] ?? "";
-                options.ClientSecret = googleAuthSettings["ClientSecret"] ?? "";
-                options.CallbackPath = "/api/auth/google-callback";
-            })
-            // Microsoft Authentication
-            .AddMicrosoftAccount(options =>
-            {
-                var msAuthSettings = builder.Configuration.GetSection("Authentication:Microsoft");
-                options.ClientId = msAuthSettings["ClientId"] ?? "";
-                options.ClientSecret = msAuthSettings["ClientSecret"] ?? "";
-                options.CallbackPath = "/api/auth/microsoft-callback";
             });
+
+            // Add Google Authentication only if credentials are provided
+            var googleClientId = builder.Configuration["Authentication:Google:ClientId"];
+            if (!string.IsNullOrEmpty(googleClientId))
+            {
+                authBuilder.AddGoogle(options =>
+                {
+                    var googleAuthSettings = builder.Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleClientId;
+                    options.ClientSecret = googleAuthSettings["ClientSecret"] ?? "";
+                    options.CallbackPath = "/api/auth/google-callback";
+                });
+            }
+
+            // Add Microsoft Authentication only if credentials are provided
+            var msClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+            if (!string.IsNullOrEmpty(msClientId))
+            {
+                authBuilder.AddMicrosoftAccount(options =>
+                {
+                    var msAuthSettings = builder.Configuration.GetSection("Authentication:Microsoft");
+                    options.ClientId = msClientId;
+                    options.ClientSecret = msAuthSettings["ClientSecret"] ?? "";
+                    options.CallbackPath = "/api/auth/microsoft-callback";
+                });
+            }
 
             // Authorisation
             builder.Services.AddAuthorization();

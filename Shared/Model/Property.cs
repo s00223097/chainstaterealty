@@ -37,5 +37,8 @@ namespace Shared.Model
 
         [Required]
         public string OwnerId { get; set; } = string.Empty;
+
+        [ForeignKey("OwnerId")]
+        public virtual IUser? Owner { get; set; }
     }
 } 

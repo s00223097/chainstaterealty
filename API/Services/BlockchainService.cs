@@ -15,25 +15,26 @@ namespace API.Services
         private readonly IConfiguration _configuration;
         private string _propertyContractAddress;
         private string _userContractAddress;
+        private readonly string _ganacheUrl;
 
         public BlockchainService(IConfiguration configuration)
         {
             _configuration = configuration;
             
-            // Connect to local Ganache blockchain
-            var url = "http://127.0.0.1:7545"; // Ganache default URL
-            _web3 = new Web3(url);
+            // Get blockchain connection URL from configuration
+            _ganacheUrl = _configuration["Blockchain:GanacheUrl"] ?? "http://127.0.0.1:7545";
+            _web3 = new Web3(_ganacheUrl);
             
-            // !!! Set contract addresses after deployment VIP
-            _propertyContractAddress = ""; // UPDATE AFTER DEPLOYMENT
-            _userContractAddress = ""; // UPDATE AFTER DEPLOYMENT
+            // Get contract addresses from configuration
+            _propertyContractAddress = _configuration["Blockchain:Contracts:PropertyAddress"] ?? "";
+            _userContractAddress = _configuration["Blockchain:Contracts:UserAddress"] ?? "";
         }
 
         #region Network and Account Methods
 
         public async Task<List<string>> GetAccountsAsync()
         {
-            return await _web3.Eth.Accounts.SendRequestAsync();
+            return (await _web3.Eth.Accounts.SendRequestAsync()).ToList();
         }
 
         public async Task<decimal> GetBalanceAsync(string address)
@@ -46,6 +47,8 @@ namespace API.Services
         {
             _propertyContractAddress = propertyAddress;
             _userContractAddress = userAddress;
+            
+            // Save to a config file? // TODO
         }
 
         public ContractAddressInfo GetContractAddresses()
@@ -61,7 +64,7 @@ namespace API.Services
         {
             // Create a new account with the private key
             var account = new Account(privateKey);
-            var web3 = new Web3(account, _web3.Client.Url);
+            var web3 = new Web3(account, _ganacheUrl);
 
             // Convert ether to wei
             var weiAmount = Web3.Convert.ToWei(etherAmount);
@@ -227,7 +230,7 @@ namespace API.Services
 
             // Create a new account with the private key
             var account = new Account(privateKey);
-            var web3 = new Web3(account, _web3.Client.Url);
+            var web3 = new Web3(account, _ganacheUrl);
 
             var registerPropertyFunction = new RegisterPropertyFunction
             {
@@ -259,7 +262,7 @@ namespace API.Services
 
             // Create a new account with the private key
             var account = new Account(privateKey);
-            var web3 = new Web3(account, _web3.Client.Url);
+            var web3 = new Web3(account, _ganacheUrl);
 
             var updatePropertyFunction = new UpdatePropertyFunction
             {
@@ -288,7 +291,7 @@ namespace API.Services
 
             // Create a new account with the private key
             var account = new Account(privateKey);
-            var web3 = new Web3(account, _web3.Client.Url);
+            var web3 = new Web3(account, _ganacheUrl);
 
             var transferPropertyFunction = new TransferPropertyFunction
             {
@@ -382,7 +385,7 @@ namespace API.Services
 
             // Create a new account with the private key
             var account = new Account(privateKey);
-            var web3 = new Web3(account, _web3.Client.Url);
+            var web3 = new Web3(account, _ganacheUrl);
 
             var registerUserFunction = new RegisterUserFunction
             {
