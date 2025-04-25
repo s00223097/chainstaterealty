@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientApp.Pages.PropertyDetailPage"
+             Title="Property Details">
+    
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <CarouselView x:Name="imageCarousel" 
+                         HeightRequest="300"
+                         Grid.Row="0">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding .}" 
+                               Aspect="AspectFill"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <Label x:Name="propertyName" 
+                   Grid.Row="1"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   Margin="20,20,20,0"/>
+
+            <Label x:Name="propertyAddress" 
+                   Grid.Row="2"
+                   FontSize="16"
+                   Margin="20,10,20,0"/>
+
+            <Label x:Name="propertyDescription" 
+                   Grid.Row="3"
+                   FontSize="14"
+                   Margin="20,20,20,0"/>
+
+            <Frame Grid.Row="4" 
+                   Margin="20,20,20,0"
+                   Padding="15"
+                   CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="Investment Details"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"/>
+
+                    <HorizontalStackLayout>
+                        <Label Text="Available Shares:"
+                               FontSize="14"/>
+                        <Label x:Name="availableShares"
+                               FontSize="14"
+                               HorizontalOptions="EndAndExpand"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <Label Text="Share Price:"
+                               FontSize="14"/>
+                        <Label x:Name="sharePrice"
+                               FontSize="14"
+                               HorizontalOptions="EndAndExpand"/>
+                    </HorizontalStackLayout>
+
+                    <Entry x:Name="sharesEntry"
+                           Placeholder="Number of shares to purchase"
+                           Keyboard="Numeric"
+                           Margin="0,20,0,0"/>
+
+                    <Button x:Name="investButton"
+                            Text="Invest"
+                            Clicked="OnInvestClicked"
+                            Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage> 

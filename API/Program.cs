@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using API.Data;
+using API.Services;
 
 namespace API
 {
@@ -23,11 +24,14 @@ namespace API
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Register BlockchainService
+            builder.Services.AddSingleton<BlockchainService>();
+
             // Configure JWT Authentication
             var jwtSettings = builder.Configuration.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!);
 
-            builder.Services.AddAuthentication(options =>
+            var authBuilder = builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,12 +52,49 @@ namespace API
                 };
             });
 
-            // Add Authorization
+            // Add Google Authentication only if credentials are provided
+            var googleClientId = builder.Configuration["Authentication:Google:ClientId"];
+            if (!string.IsNullOrEmpty(googleClientId))
+            {
+                authBuilder.AddGoogle(options =>
+                {
+                    var googleAuthSettings = builder.Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleClientId;
+                    options.ClientSecret = googleAuthSettings["ClientSecret"] ?? "";
+                    options.CallbackPath = "/api/auth/google-callback";
+                });
+            }
+
+            // Add Microsoft Authentication only if credentials are provided
+            var msClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+            if (!string.IsNullOrEmpty(msClientId))
+            {
+                authBuilder.AddMicrosoftAccount(options =>
+                {
+                    var msAuthSettings = builder.Configuration.GetSection("Authentication:Microsoft");
+                    options.ClientId = msClientId;
+                    options.ClientSecret = msAuthSettings["ClientSecret"] ?? "";
+                    options.CallbackPath = "/api/auth/microsoft-callback";
+                });
+            }
+
+            // Authorisation
             builder.Services.AddAuthorization();
 
-            // Add Controllers
+            // Configure CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            // Controllers
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // from https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -67,6 +108,7 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

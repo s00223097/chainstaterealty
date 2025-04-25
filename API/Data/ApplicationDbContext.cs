@@ -12,6 +12,8 @@ namespace API.Data
         }
 
         public DbSet<Test> Test { get; set; } = default!;
+        public DbSet<Property> Properties { get; set; } = default!;
+        public DbSet<Investment> Investments { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,12 +24,26 @@ namespace API.Data
             );
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Property>()
+                .HasOne<ApplicationUser>()
+                .WithMany()
+                .HasForeignKey(p => p.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Investment>()
+                .HasOne<ApplicationUser>()
+                .WithMany()
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 
-    public class ApplicationUser : IdentityUser
+    // IUser interface
+    public class ApplicationUser : IdentityUser, IUser
     {
-        // Add custom properties here if needed
+        public string? FullName { get; set; }
+        public bool IsVerified { get; set; }
+        public DateTime? VerificationDate { get; set; }
     }
-
 }

@@ -5,24 +5,33 @@ namespace ClientApp.Pages;
 
 public partial class HomePage : ContentPage
 {
-	private ApiService service;
+	private readonly ApiService _apiService;
 
 	public HomePage(ApiService apiService)
 	{
 		InitializeComponent();
-
-		service = apiService;
+		_apiService = apiService;
 	}
 
-    protected override async void OnAppearing()
-    {
-		List<Test> tests = await service.GetTestsAsync();
+	private async void OnBrowsePropertiesClicked(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new PropertiesPage(_apiService));
+	}
+
+	private async void OnMyInvestmentsClicked(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new InvestmentsPage(_apiService));
+	}
+
+	protected override async void OnAppearing()
+	{
+		List<Test> tests = await _apiService.GetTestsAsync();
 
 		foreach (Test test in tests)
 		{
 			System.Diagnostics.Debug.WriteLine(test.Name);
 		}
 
-        base.OnAppearing();
-    }
+		base.OnAppearing();
+	}
 }

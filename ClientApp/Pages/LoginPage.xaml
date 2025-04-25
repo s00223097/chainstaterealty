@@ -2,26 +2,92 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientApp.Pages.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout>
+             Title="Login">
+    <Grid>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            <Label 
+                Text="Welcome Back"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" 
+                Margin="0,0,0,20"/>
+                
+            <Entry 
+               x:Name="txtEmail" 
+               Placeholder="Email"
+               Keyboard="Email"
+               VerticalOptions="Center"/>
 
-        <Entry 
-           x:Name="txtEmail" 
-           Placeholder="EMAIL"
-           VerticalOptions="Center"
-           Text="sample@email.com"/>
-
-        <Entry 
-           x:Name="txtPassword" 
-           Placeholder="PASSWORD"
-           VerticalOptions="Center"
-           IsPassword="True"/>
-        
-        <Button
-                x:Name="btnLogin"
-                Text="LOGIN" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnLoginClicked"
+            <Entry 
+               x:Name="txtPassword" 
+               Placeholder="Password"
+               VerticalOptions="Center"
+               IsPassword="True"/>
+            
+            <Button
+               x:Name="btnLogin"
+               Text="LOGIN" 
+               Clicked="OnLoginClicked"
+               HorizontalOptions="Fill"
+               Margin="0,20,0,0" />
+            
+            <!-- Social Login Section -->
+            <Label 
+                Text="OR"
+                HorizontalOptions="Center"
+                Margin="0,20,0,20"
+                FontSize="16"
+                TextColor="Gray"/>
+            
+            <Button
+                x:Name="btnGoogleLogin"
+                Text="Sign in with Google" 
+                Clicked="OnGoogleLoginClicked"
+                BackgroundColor="#DB4437"
+                TextColor="White"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,10" />
+                
+            <Button
+                x:Name="btnMicrosoftLogin"
+                Text="Sign in with Microsoft" 
+                Clicked="OnMicrosoftLoginClicked"
+                BackgroundColor="#2F2F2F"
+                TextColor="White"
                 HorizontalOptions="Fill" />
-    </VerticalStackLayout>
+            
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
+                <Label Text="Don't have an account?" VerticalOptions="Center" />
+                <Button 
+                    x:Name="btnRegister"
+                    Text="Register" 
+                    Clicked="OnRegisterClicked"
+                    TextColor="{StaticResource Primary}"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Padding="0" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        
+        <!-- Loading overlay -->
+        <Grid 
+            x:Name="loadingOverlay" 
+            BackgroundColor="#80000000" 
+            IsVisible="false">
+            <VerticalStackLayout 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Spacing="10">
+                <ActivityIndicator 
+                    IsRunning="True" 
+                    Color="{StaticResource Primary}" 
+                    HeightRequest="50" 
+                    WidthRequest="50"/>
+                <Label 
+                    Text="Logging in..." 
+                    TextColor="White" 
+                    FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

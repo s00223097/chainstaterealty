@@ -23,12 +23,15 @@ namespace ClientApp
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<PropertiesPage>();
+            builder.Services.AddTransient<PropertyDetailPage>();
+            builder.Services.AddTransient<InvestmentsPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
 
-            var app =  builder.Build();
+            var app = builder.Build();
 
             var serviceProvider = app.Services;
             var application = serviceProvider.GetRequiredService<MainPage>();
